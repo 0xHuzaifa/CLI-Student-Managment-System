@@ -1,52 +1,85 @@
-import { getStudentData } from "../userInput/UserInput.js";
+import { getStudentData, addCourse, viewCourses } from "../userInput/UserInput.js";
+
+
+const students: Student[] = [];
+
+let enrolmentNo: number = 0;
 
 interface Student {
     firstName: string,
     lastName: string,
+    fullName: string,
+    enrolmentNo: number,
     fatherName: string,
     course: string,
-    isEnrolled: boolean,
-    displayStudent(): void
+    rollNo: number,
 }
 
 class Enrolment implements Student {
     public firstName: string;
     public lastName: string;
+    public fullName: string;
     public fatherName: string;
-    protected uniqueId: number;
+    public enrolmentNo: number = 0;
     public course: string;
-    public isEnrolled: boolean;
+    public rollNo: number = 0;
 
     constructor(
             firstName: string, 
             lastName: string, 
-            fatherName: string, 
-            uniqueId: number, 
+            fatherName: string,
+            enrolmentNo: number,
             course: string,
-            isEnrolled: boolean
+            rollNo: number
         ) 
     {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.fullName = `${this. firstName} ${this.lastName}`
         this.fatherName = fatherName;
-        this.uniqueId = uniqueId;
+        this.enrolmentNo = enrolmentNo,
         this.course = course;
-        this.isEnrolled = false
-    }
-
-    fullName(): string {
-        const fullName: string = `${this.firstName} ${this.lastName}`;
-        return fullName;
+        this.rollNo = rollNo;
     }
 
     displayStudent(): void {
         console.log(`
-        Name: ${this.fullName()}
+        Name: ${this.fullName}
         Father Name: ${this.fatherName}
-        Roll No: ${this.uniqueId}
+        Enrolment No: ${this.enrolmentNo}
         Course: ${this.course} 
+        Roll No: ${this.rollNo}
         `);
     }
 }
 
+
+async function createStudent() {
+    const studentEnrolmentNo: number = enrolmentNo + 1;
+    const studentData = await getStudentData();
+    const studentRollNo: number = studentData.rollNo;
+    console.log(studentRollNo);
+    
+
+    const student: Enrolment = new Enrolment(
+        studentData.firstName,
+        studentData.lastName,
+        studentData.fatherName,
+        studentEnrolmentNo,
+        studentData.course as string,
+        studentRollNo
+    )
+    students.push(student)
+    console.log(students);
+    
+}
+
+await createStudent()
+
+
+
+// const generateRollNo = async () =>  {
+    
+//     return rollNo;
+// }
 
