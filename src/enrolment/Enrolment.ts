@@ -1,27 +1,24 @@
-import { getStudentData, addCourse, viewCourses } from "../userInput/UserInput.js";
 
-
-const students: Student[] = [];
-
-let enrolmentNo: number = 0;
-
-interface Student {
+export interface Student {
     firstName: string,
     lastName: string,
     fullName: string,
     enrolmentNo: number,
     fatherName: string,
-    course: string,
+    course: string[],
     rollNo: number,
+    displayStudent(): void,
+    addCourse(courseName: string): void
+
 }
 
-class Enrolment implements Student {
+export class Enrolment implements Student {
     public firstName: string;
     public lastName: string;
     public fullName: string;
     public fatherName: string;
     public enrolmentNo: number = 0;
-    public course: string;
+    public course: string[];
     public rollNo: number = 0;
 
     constructor(
@@ -29,7 +26,7 @@ class Enrolment implements Student {
             lastName: string, 
             fatherName: string,
             enrolmentNo: number,
-            course: string,
+            course: string[],
             rollNo: number
         ) 
     {
@@ -47,39 +44,13 @@ class Enrolment implements Student {
         Name: ${this.fullName}
         Father Name: ${this.fatherName}
         Enrolment No: ${this.enrolmentNo}
-        Course: ${this.course} 
+        Course: ${this.course.join(', ')} 
         Roll No: ${this.rollNo}
         `);
     }
+
+    addCourse(courseName: string): number {
+        return this.course.push(courseName);
+    }
 }
-
-
-async function createStudent() {
-    const studentEnrolmentNo: number = enrolmentNo + 1;
-    const studentData = await getStudentData();
-    const studentRollNo: number = studentData.rollNo;
-    console.log(studentRollNo);
-    
-
-    const student: Enrolment = new Enrolment(
-        studentData.firstName,
-        studentData.lastName,
-        studentData.fatherName,
-        studentEnrolmentNo,
-        studentData.course as string,
-        studentRollNo
-    )
-    students.push(student)
-    console.log(students);
-    
-}
-
-await createStudent()
-
-
-
-// const generateRollNo = async () =>  {
-    
-//     return rollNo;
-// }
 

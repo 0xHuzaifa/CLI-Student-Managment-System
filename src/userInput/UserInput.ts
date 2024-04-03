@@ -62,11 +62,3 @@ export const getStudentData = async () => {
 }
 
 
-export const addCourse = async (course: string) => {
-    return courses.push(course);
-}
-
-export const viewCourses = () => {
-    return courses.join(`\n`)
-}
-

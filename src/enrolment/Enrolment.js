@@ -1,7 +1,4 @@
-import { getStudentData } from "../userInput/UserInput.js";
-const students = [];
-let enrolmentNo = 0;
-class Enrolment {
+export class Enrolment {
     firstName;
     lastName;
     fullName;
@@ -23,21 +20,11 @@ class Enrolment {
         Name: ${this.fullName}
         Father Name: ${this.fatherName}
         Enrolment No: ${this.enrolmentNo}
-        Course: ${this.course} 
+        Course: ${this.course.join(', ')} 
         Roll No: ${this.rollNo}
         `);
     }
+    addCourse(courseName) {
+        return this.course.push(courseName);
+    }
 }
-async function createStudent() {
-    const studentEnrolmentNo = enrolmentNo + 1;
-    const studentData = await getStudentData();
-    const studentRollNo = studentData.rollNo;
-    console.log(studentRollNo);
-    const student = new Enrolment(studentData.firstName, studentData.lastName, studentData.fatherName, studentEnrolmentNo, studentData.course, studentRollNo);
-    students.push(student);
-    console.log(students);
-}
-await createStudent();
-// const generateRollNo = async () =>  {
-//     return rollNo;
-// }

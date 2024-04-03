@@ -53,11 +53,3 @@ export const getStudentData = async () => {
     const rollNo = (courseEnrolment[selectedCourse] || 0) + 1;
     return { ...studentData, rollNo };
 };
-export const addCourse = async (course) => {
-    return courses.push(course);
-};
-export const viewCourses = () => {
-    return courses.join(`\n`);
-};
-// 3:12, 64
-// 3:31 72
