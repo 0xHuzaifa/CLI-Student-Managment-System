@@ -58,6 +58,8 @@ export const getStudentData = async () => {
     const selectedCourse: string = studentData.course as string;
     const rollNo: number = (courseEnrolment[selectedCourse] || 0) + 1;
 
+    courseEnrolment[selectedCourse] = rollNo;
+
     return {...studentData, rollNo};
 }
 

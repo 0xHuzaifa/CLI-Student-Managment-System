@@ -51,5 +51,6 @@ export const getStudentData = async () => {
     ]);
     const selectedCourse = studentData.course;
     const rollNo = (courseEnrolment[selectedCourse] || 0) + 1;
+    courseEnrolment[selectedCourse] = rollNo;
     return { ...studentData, rollNo };
 };

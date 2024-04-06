@@ -1,7 +1,7 @@
 import inquirer from "inquirer";
-import { courses } from "./UserInput.js";
+import { courses } from "../user_Input/UserInput.js";
 
-export const getAddMoreCourse = async (): Promise<string> => {
+export const getSelectCourse = async (): Promise<string> => {
     const selectCourse = await inquirer.prompt({
         name: 'select',
         type: 'checkbox',
